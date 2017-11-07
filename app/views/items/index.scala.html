@@ -1,0 +1,17 @@
+@(items : Set[Item])
+
+<html>
+	<head>
+	<title>All items</title>
+
+	</head>
+	<body>
+		<h1>All items</h1>
+
+		@for(item<-items){
+            <p>Esto es un párrafo HTML</p>
+            <a href="#">@item.name</a>
+            <p>Price: @item.price</p>
+		}
+	</body>
+</html>
