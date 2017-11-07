@@ -10,6 +10,9 @@ public class Item {
     public Integer price;
     public String categorie;
 
+    public Item(){
+
+    }
     public Item(Integer id, String name, Integer price, String categorie){
         this.id=id;
         this.name=name;

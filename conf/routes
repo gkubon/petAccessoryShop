@@ -17,7 +17,7 @@ GET     /welcome/:name/:lastname              controllers.HomeController.welcome
 GET     /basket              controllers.HomeController.basket
 
 # items
-GET     /items              controllers.List.index
+GET     /items              controllers.List.index()
 POST    /items/create       controllers.List.create()
 GET     /items/:id          controllers.List.show(id : Integer)
 GET     /items/edit/:id     controllers.List.edit(id : Integer)
