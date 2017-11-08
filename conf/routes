@@ -46,27 +46,3 @@ GET     /assets/*file               controllers.Assets.versioned(path="/public",
 # GET         /login                           controllers.Application.login
 # POST        /login                           controllers.Application.authenticate
 # GET         /logout                          controllers.Application.logout
-
-# Admin / Product management
-# GET         /admin                           controllers.Admin.index
-# POST        /admin/changePass                controllers.Admin.changePass
-# GET         /admin/items/form                controllers.Admin.newItemForm
-# POST        /admin/items                     controllers.Admin.newItem
-# POST        /admin/items/:id/sold            controllers.Admin.itemSold(id: Int)
-# POST        /admin/items/:id/deleted         controllers.Admin.deleteItem(id: Int)
-
-# GET         /admin/cat/form                  controllers.Admin.newCategoryForm
-# POST        /admin/cat                       controllers.Admin.newCategory
-
-# public stuff
-# GET         /items                           controllers.Items.list
-# GET         /items/sold                      controllers.Items.listSold
-
-# GET         /items/:id                       controllers.Items.details(id: Int)
-# GET         /items/:id/highestBid            controllers.Items.highestBid(id: Int)
-# POST        /items/:id/bid                   controllers.Items.newBid(id: Int)
-
-# GET         /items/cat/:category             controllers.Items.listCat(category: String)
-# GET         /items/cat/:category/sold        controllers.Items.listCatSold(category: String)
-
-# GET         /feed                            controllers.Feeds.latest
