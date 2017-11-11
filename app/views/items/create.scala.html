@@ -1,0 +1,18 @@
+@(itemForm : Form[Item])
+@import helper._
+
+<html>
+	<head>
+	<title>Create Item</title>
+
+	</head>
+	<body>
+		<h1>Create Item</h1>
+		@helper.form(action = routes.List.save()){
+
+			@helper.inputText(itemForm("name"))
+			@helper.inputText(itemForm("categorie"))
+			<input type="submit" value="Create Item">
+		}
+	</body>
+</html>

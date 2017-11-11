@@ -10,13 +10,25 @@ GET     /count                      controllers.CountController.count
 GET     /message                    controllers.AsyncController.message
 
 
-
-
 # tests
 GET     /welcome/:name/:lastname              controllers.HomeController.welcome(name: String, lastname: String)
 
 # Basket
 GET     /basket              controllers.HomeController.basket
+
+# items
+GET     /items              controllers.List.index()
+POST    /items/create       controllers.List.create()
+GET     /items/:id          controllers.List.show(id : Integer)
+GET     /items/edit/:id     controllers.List.edit(id : Integer)
+POST    /items/edit         controllers.List.update()
+POST    /items/create       controllers.List.save()
+GET     /items/delete/:id   controllers.List.destroy(id : Integer)
+
+
+GET     /items/cat/:category  controllers.List.listCat(category: String)
+
+
 
 
 
@@ -25,3 +37,12 @@ GET     /basket              controllers.HomeController.basket
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
+
+
+
+
+
+# Authentication
+# GET         /login                           controllers.Application.login
+# POST        /login                           controllers.Application.authenticate
+# GET         /logout                          controllers.Application.logout
