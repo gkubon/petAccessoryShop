@@ -1,0 +1,15 @@
+@(item : Item)
+
+<html>
+	<head>
+	<title>@item.name</title>
+
+	</head>
+	<body>
+		<h1>@item.name</h1>
+            <p>Name: <a href="http://localhost:9000/items/id/@item.id"> @item.name</a></p>
+            <p>Price: @item.price zl</p>
+            <p>Description: @item.description</p>
+            <p>Picture: @item.picture</p>
+	</body>
+</html>

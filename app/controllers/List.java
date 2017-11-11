@@ -34,8 +34,25 @@ public class List extends Controller {
     }
 
     public Result show(Integer id) {
-        return TODO;
+    	Item item = Item.findById(id);
+    	if (item==null){
+    		return notFound("item not found");
+    	}
+    	return ok(show.render(item));
     }
+    /*    public Result welcome(String name, String lastname) {
+        return ok( "HI , "  +name + " " + lastname+" Welcome to PETSHOPAPP");
+    }*/
+    public Result categorie(String categories) {
+        //Set<Item> items = Item.allItems();
+        Set<Item> item = Item.findByCategorie(categories);
+    	if (item==null){
+    		return notFound("categorie not found");
+    	}
+        return ok(categorie.render(item));
+
+    }
+    
     public Result edit(Integer id) {
         return TODO;
     }

@@ -1,16 +1,20 @@
+@*
+ * (items : Set[Item],categorie: String)
+ * message to display.
+ *@
+
 @(items : Set[Item])
 
 <html>
 	<head>
-	<title>All items</title>
+	<title>Category</title>
 
 	</head>
 	<body>
-		<h1>All items</h1>
+		<h1>category</h1>
 
 		@for(item<-items){
             <p>Name: <a href="http://localhost:9000/items/id/@item.id"> @item.name</a></p>
-            <p>Categorie: <a href="http://localhost:9000/items/@item.categorie">@item.categorie</a></p>
             <p>Price: @item.price zl</p>
             <p>---------------------------------
           	</p>

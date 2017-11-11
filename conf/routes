@@ -17,16 +17,17 @@ GET     /welcome/:name/:lastname              controllers.HomeController.welcome
 GET     /basket              controllers.HomeController.basket
 
 # items
-GET     /items              controllers.List.index()
+GET     /items/              controllers.List.index()
+GET     /items/:category    controllers.List.categorie(category: String)
 POST    /items/create       controllers.List.create()
-GET     /items/:id          controllers.List.show(id : Integer)
+GET     /items/id/:id          controllers.List.show(id : Integer)
 GET     /items/edit/:id     controllers.List.edit(id : Integer)
 POST    /items/edit         controllers.List.update()
 POST    /items/create       controllers.List.save()
 GET     /items/delete/:id   controllers.List.destroy(id : Integer)
 
 
-GET     /items/cat/:category  controllers.List.listCat(category: String)
+
 
 
 
