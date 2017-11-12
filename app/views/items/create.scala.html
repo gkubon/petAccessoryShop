@@ -8,10 +8,14 @@
 	</head>
 	<body>
 		<h1>Create Item</h1>
-		@helper.form(action = routes.List.save()){
+		@helper.form(action = helper.CSRF(routes.List.save())){
 
+			@helper.inputText(itemForm("id"))
 			@helper.inputText(itemForm("name"))
+			@helper.inputText(itemForm("price"))
 			@helper.inputText(itemForm("categorie"))
+			@helper.inputText(itemForm("description"))
+			@helper.inputText(itemForm("picture"))
 			<input type="submit" value="Create Item">
 		}
 	</body>

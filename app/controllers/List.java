@@ -26,6 +26,7 @@ public class List extends Controller {
         Set<Item> items = Item.allItems();
         return ok(index.render(items));
     }
+    
     public Result create()
     {
         Form<Item> itemForm=formFactory.form(Item.class);
@@ -60,7 +61,10 @@ public class List extends Controller {
         return TODO;
     }
     public Result save() {
-        return TODO;
+        Form<Item> itemForm=formFactory.form(Item.class).bindFromRequest();
+        Item item= itemForm.get();
+        item.add(item);
+        return redirect(routes.List.index());
     }
 
     //for books details

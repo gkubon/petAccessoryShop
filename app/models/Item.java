@@ -35,6 +35,15 @@ public class Item {
         this.description=description;
         this.picture=picture;
         //this.color=color;
+    }    
+    public Item(Integer id, String name, String categorie,String description,String picture){
+        this.id=id;
+        this.name=name;
+        this.price=9999999;
+        this.categorie=categorie;
+        this.description=description;
+        this.picture=picture;
+        //this.color=color;
     }
     private static Set<Item> items;
     static{
