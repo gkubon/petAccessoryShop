@@ -20,7 +20,7 @@ public class HomeController extends Controller {
         return ok(index.render());
     }
     public Result welcome(String name, String lastname) {
-        return ok( "HI , "  +name + " " + lastname+" Welcome to PETSHOPAPP");
+        return ok( "HI , "  +name + "  " + lastname+" Welcome to PETSHOPAPP");
     }
     public Result basket() {
         return ok( "Basket is empty");
