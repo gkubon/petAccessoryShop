@@ -24,13 +24,27 @@ GET     /basket             controllers.HomeController.basket
 GET     /items/             controllers.ItemController.index()
 GET     /items/:category    controllers.ItemController.categorie(category: String)
 GET     /create/      		controllers.ItemController.create()
-GET     /items/id/:id       controllers.ItemController.show(id : Integer)
-GET     /items/edit/:id     controllers.ItemController.edit(id : Integer)
+GET     /items/id/:id       controllers.ItemController.show(id : Long)
+GET     /items/edit/:id     controllers.ItemController.edit(id : Long)
 POST    /items/edit         controllers.ItemController.update()
 POST    /save/      		controllers.ItemController.save()
-GET     /items/delete/:id   controllers.ItemController.destroy(id : Integer)
+GET     /items/delete/:id   controllers.ItemController.destroy(id : Long)
+
+# farmers
+GET     /farmers/             controllers.FarmerController.index()
+GET     /farmers/:category    controllers.FarmerController.categorie(category: String)
+GET     /farmers/create/      		controllers.FarmerController.create()
+GET     /farmers/id/:id       controllers.FarmerController.show(id : Long)
+GET     /farmers/edit/:id     controllers.FarmerController.edit(id : Long)
+POST    /farmers/edit         controllers.FarmerController.update()
+POST    /farmers/save/      		controllers.FarmerController.save()
+GET     /farmers/delete/:id   controllers.FarmerController.destroy(id : Long)
 
 
+
+GET     /login/        controllers.SessionController.login()
+POST    /login/        controllers.SessionController.authenticate()
+GET     /logout/       controllers.SessionController.logout()
 
 
 

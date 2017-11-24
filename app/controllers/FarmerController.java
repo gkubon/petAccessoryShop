@@ -3,7 +3,7 @@ package controllers;
 import play.data.*;
 import play.mvc.*;
 import models.*;
-import views.html.items.*;
+import views.html.farmers.*;
 import java.util.*;
 import javax.inject.Inject;
 
@@ -12,7 +12,7 @@ import javax.inject.Inject;
  * This controller contains an action to handle HTTP requests
  * to the application's home page.
  */
-public class ItemController extends Controller {
+public class FarmerController extends Controller {
 
     /**
      * An action that renders an HTML page with a welcome message.
@@ -24,20 +24,24 @@ public class ItemController extends Controller {
     FormFactory formFactory;
 
     public Result index() {
-        List<Item> items = Item.find.all();
+        List<Farmer> items = Farmer.find.all();
 
         return ok(index.render(items));
     }
     
     public Result create()
     {
-        Form<Item> itemForm=formFactory.form(Item.class);
+        Form<Farmer> itemForm=formFactory.form(Farmer.class);
+        if(itemForm.hasErrors()) {
+        	return redirect(routes.FarmerController.index());
+         } else {
+             return ok(create.render(itemForm));
+         }
 
-        return ok(create.render(itemForm));
     }
 
     public Result show(Long id) {
-    	Item item = Item.find.byId(id);
+    	Farmer item = Farmer.find.byId(id);
     	if (item==null){
     		return notFound("item not found");
     	}
@@ -48,13 +52,13 @@ public class ItemController extends Controller {
     }*/
     public Result categorie(String categories) {
     /*	String sql =   "select name from product where price = 100";
-    	Item.db().findList(SELECT * FROM EMPLOYEE_TBL;, transaction)db();
-        List<Item> list = Item.find(Item.class)
+    	Farmer.db().findList(SELECT * FROM EMPLOYEE_TBL;, transaction)db();
+        List<Farmer> list = Farmer.find(Farmer.class)
      		   // fetch just these properties for the Order
      		  .select("categorie");
-        //Set<Item> items = Item.allItems();
-    	//Set<Item> item = Item.findByCategorie(categories);
-    	/*Set<Item> item = Item.findByCategorie(categories);
+        //Set<Farmer> items = Farmer.allFarmers();
+    	//Set<Farmer> item = Farmer.findByCategorie(categories);
+    	/*Set<Farmer> item = Farmer.findByCategorie(categories);
     	if (item==null){
     		return notFound("categorie not found");
     	}
@@ -70,20 +74,20 @@ public class ItemController extends Controller {
         return TODO;
     }
     public Result save() {
-        Form<Item> itemForm=formFactory.form(Item.class).bindFromRequest();
-        Item item= itemForm.get();
+        Form<Farmer> itemForm=formFactory.form(Farmer.class).bindFromRequest();
+        Farmer item= itemForm.get();
         item.save();
-        return redirect(routes.ItemController.index());
+        return redirect(routes.FarmerController.index());
     }
 
     //for books details
     public Result destroy(Long id) {
-    	Item item= Item.find.byId(id);
+    	Farmer item= Farmer.find.byId(id);
     	if (item==null) {
     		return notFound("item not found");
     	}
     	item.delete();
-    	return redirect(routes.ItemController.index());
+    	return redirect(routes.FarmerController.index());
     }
     public Result listCat(String category) {
         return ok( "category : "  +category + " not implemented ");

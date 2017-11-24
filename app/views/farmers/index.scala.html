@@ -1,0 +1,33 @@
+
+@(items : List[Farmer])
+
+<html>
+	<head>
+	<title>All farmers</title>
+
+	</head>
+	<body>
+		<h1>All farmers</h1>
+
+		@for(item<-items){
+            <p>Name: <a href="http://localhost:9000/farmers/id/@item.id"> @item.name</a></p>
+            <p>email: <a href="http://localhost:9000/farmers/@item.email">@item.email</a></p>
+            <p>---------------------------------
+          	</p>
+		}
+		<a href="http://localhost:9000/products/"><i class="hd-dign"></i>Products page</a>   
+		@if(session().isEmpty()) {
+      <li>
+         <td><a href="@routes.FarmerController.create()">Register</a></td>
+      </li>
+      <li>
+         <td><a href="@routes.SessionController.login()">Login</a></td>
+      </li>
+   } else {
+      <li>
+         <td><a href="@routes.SessionController.logout()">Logout</a></td>
+      </li>
+   }
+		
+	</body>
+</html>

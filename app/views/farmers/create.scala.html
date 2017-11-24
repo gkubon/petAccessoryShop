@@ -1,0 +1,20 @@
+@(itemForm : Form[Farmer])
+@import helper._
+
+<html>
+	<head>
+	<title>Create Farmer</title>
+
+	</head>
+	<body>
+		<h1>Create Farmer</h1>
+		@helper.form(action = helper.CSRF(routes.FarmerController.save())){
+
+			@helper.inputText(itemForm("id"))
+			@helper.inputText(itemForm("email"))
+			@helper.inputPassword(itemForm("password"))
+			@helper.inputText(itemForm("name"))
+			<input type="submit" value="Create User">
+		}
+	</body>
+</html>
