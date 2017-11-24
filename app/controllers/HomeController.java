@@ -2,12 +2,13 @@ package controllers;
 
 import play.mvc.*;
 
+import java.util.List;
 import java.util.Set;
 
 import models.*;
 
 import views.html.*;
-import views.html.items.categorie;
+//import views.html.items.categorie;
 
 /**
  * This controller contains an action to handle HTTP requests
@@ -25,17 +26,21 @@ public class HomeController extends Controller {
         return ok(index.render());
     }
 	public Result products() {
-        Set<Item> items = Item.allItems();
+        List<Item> items = Item.find.all();
         return ok(products.render(items));
     }
-    public Result categories(String blabla) {
+    public Result categorie(String categories) {
         //Set<Item> items = Item.allItems();
-        Set<Item> item = Item.findByCategorie(blabla);
+    	//Set<Item> item = Item.findByCategorie(categories);
+    	/*Set<Item> item = Item.findByCategorie(categories);
     	if (item==null){
     		return notFound("categorie not found");
     	}
-        return ok(categories.render(item));
-    } 
+        return ok(categorie.render(item));
+*/
+    	//return ok( "TODO");
+        return TODO;
+    }
     public Result welcome(String name, String lastname) {
         return ok( "HI , "  +name + "  " + lastname+" Welcome to PETSHOPAPP");
     }

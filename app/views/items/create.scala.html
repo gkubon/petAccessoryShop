@@ -8,7 +8,7 @@
 	</head>
 	<body>
 		<h1>Create Item</h1>
-		@helper.form(action = helper.CSRF(routes.List.save())){
+		@helper.form(action = helper.CSRF(routes.ItemController.save())){
 
 			@helper.inputText(itemForm("id"))
 			@helper.inputText(itemForm("name"))

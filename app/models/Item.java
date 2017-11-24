@@ -1,25 +1,32 @@
 package models;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
+import io.ebean.*;
+import javax.persistence.*;
 
-
-public class Item {
+@Entity
+public class Item extends Model{
+	@Id
     public Integer id;
     public String name;
-    public Integer price;
+    public Double price;
     public String categorie;
     public String description;
+    public Integer quantity;
+    
     public String color;
     public String picture;
     
 
 
-
+    public static Finder<Integer,Item> find = new Finder<>(Item.class);
+/*
     public Item(){
 
     }
-    public Item(Integer id, String name, Integer price, String categorie,String description){
+    public Item(Integer id, String name, Double price, String categorie,String description){
         this.id=id;
         this.name=name;
         this.price=price;
@@ -27,7 +34,7 @@ public class Item {
         this.description=description;
         //this.color=color;
     }    
-    public Item(Integer id, String name, Integer price, String categorie,String description,String picture){
+    public Item(Integer id, String name, Double price, String categorie,String description,String picture){
         this.id=id;
         this.name=name;
         this.price=price;
@@ -39,7 +46,7 @@ public class Item {
     public Item(Integer id, String name, String categorie,String description,String picture){
         this.id=id;
         this.name=name;
-        this.price=9999999;
+        this.price=9999999.99;
         this.categorie=categorie;
         this.description=description;
         this.picture=picture;
@@ -48,16 +55,16 @@ public class Item {
     private static Set<Item> items;
     static{
         items = new HashSet<>();
-        items.add(new Item(1,"Cat bell", 204,"cat","ring ring","PATH"));
-        items.add(new Item(2,"Cat house", 2320,"cat","qwert"));
-        items.add(new Item(3,"Cat cover", 24320,"cat","qwert"));
-        items.add(new Item(4,"tiger love", 28670,"tiger","<3<3<3<3<3<3<3<3"));
-        items.add(new Item(5,"Cat carrier", 28670,"cat","etmate(R) Sky Kennel(R) Dog Crate You only want the best for your dog, especially when traveling. The Sky Kennel(R) Dog Crate by PetMate(R) is preferred by airlines and is approved by the ATA (Airline Transportation Association). With heavy-dut"));
-        items.add(new Item(6,"dog house", 228760,"dog","sdsadsadsada"));
-        items.add(new Item(7,"dog food", 87,"dog","zcxxzczcx"));
-        items.add(new Item(8,"dog cover", 22768732,"dog","qwqweqweqewert"));
-        items.add(new Item(9,"dog crate", 287223,"dog","gfdgfd"));
-        items.add(new Item(10,"dog house", 286865322,"dog","Dog House Built to endure years of use, the Pet Zone Tuff-n-Rugged doghouse has earned the Consumer Digest Best Buy Award, and is an excellent choice for dog owners who need a rugged structure that offers comfort even in extreme w"));
+        items.add(new Item(1,"Cat bell", 204.0,"cat","ring ring","PATH"));
+        items.add(new Item(2,"Cat house", 2320.0,"cat","qwert"));
+        items.add(new Item(3,"Cat cover", 24320.0,"cat","qwert"));
+        items.add(new Item(4,"tiger love", 28670.0,"tiger","<3<3<3<3<3<3<3<3"));
+        items.add(new Item(5,"Cat carrier", 28670.0,"cat","etmate(R) Sky Kennel(R) Dog Crate You only want the best for your dog, especially when traveling. The Sky Kennel(R) Dog Crate by PetMate(R) is preferred by airlines and is approved by the ATA (Airline Transportation Association). With heavy-dut"));
+        items.add(new Item(6,"dog house", 228760.0,"dog","sdsadsadsada"));
+        items.add(new Item(7,"dog food", 87.0,"dog","zcxxzczcx"));
+        items.add(new Item(8,"dog cover", 22.768732,"dog","qwqweqweqewert"));
+        items.add(new Item(9,"dog crate", 287.223,"dog","gfdgfd"));
+        items.add(new Item(10,"dog house", 286.865322,"dog","Dog House Built to endure years of use, the Pet Zone Tuff-n-Rugged doghouse has earned the Consumer Digest Best Buy Award, and is an excellent choice for dog owners who need a rugged structure that offers comfort even in extreme w"));
 
     }
     public static Set<Item> allItems(){
@@ -84,7 +91,11 @@ public class Item {
     public static void add(Item item){
         items.add(item);
     }
+
+    public static Integer getElements() {
+    	return items.size();
+    }
     public static boolean remove(Item item){
         return items.remove(item);
-    }
+    }*/
 }

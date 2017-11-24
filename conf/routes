@@ -5,7 +5,7 @@
 # An example controller showing a sample home page
 GET     /                           controllers.HomeController.index
 GET     /products/                  controllers.HomeController.products
-GET     /products/:category         controllers.HomeController.categories(category: String)
+GET     /products/:category         controllers.HomeController.categorie(category: String)
 # An example controller showing how to use dependency injection
 GET     /count                      controllers.CountController.count
 # An example controller showing how to write asynchronous code
@@ -18,17 +18,17 @@ GET     /assets/*file               controllers.Assets.at(path="/public", file)
 GET     /welcome/:name/:lastname              controllers.HomeController.welcome(name: String, lastname: String)
 
 # Basket
-GET     /basket              controllers.HomeController.basket
+GET     /basket             controllers.HomeController.basket
 
 # items
-GET     /items/              controllers.List.index()
-GET     /items/:category    controllers.List.categorie(category: String)
-GET     /create/       controllers.List.create()
-GET     /items/id/:id          controllers.List.show(id : Integer)
-GET     /items/edit/:id     controllers.List.edit(id : Integer)
-POST    /items/edit         controllers.List.update()
-POST    /save/       controllers.List.save()
-GET     /items/delete/:id   controllers.List.destroy(id : Integer)
+GET     /items/             controllers.ItemController.index()
+GET     /items/:category    controllers.ItemController.categorie(category: String)
+GET     /create/      		controllers.ItemController.create()
+GET     /items/id/:id       controllers.ItemController.show(id : Integer)
+GET     /items/edit/:id     controllers.ItemController.edit(id : Integer)
+POST    /items/edit         controllers.ItemController.update()
+POST    /save/      		controllers.ItemController.save()
+GET     /items/delete/:id   controllers.ItemController.destroy(id : Integer)
 
 
 
