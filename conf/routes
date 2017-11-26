@@ -4,11 +4,16 @@
 
 # An example controller showing a sample home page
 GET     /                           controllers.HomeController.index
-
 GET     /main                           controllers.HomeController.main
-
 GET     /products/                  controllers.HomeController.products
+
+# dont work, TO DO or only to compile and delete before demonstrate
+
 GET     /products/:category         controllers.HomeController.categorie(category: String)
+
+
+
+
 # An example controller showing how to use dependency injection
 GET     /count                      controllers.CountController.count
 # An example controller showing how to write asynchronous code
@@ -24,27 +29,33 @@ GET     /welcome/:name/:lastname              controllers.HomeController.welcome
 GET     /basket             controllers.HomeController.basket
 
 # items
+# work
 GET     /items/             controllers.ItemController.index()
 GET     /items/:category    controllers.ItemController.categorie(category: String)
 GET     /create/      		controllers.ItemController.create()
 GET     /items/id/:id       controllers.ItemController.show(id : Long)
-GET     /items/edit/:id     controllers.ItemController.edit(id : Long)
-POST    /items/edit         controllers.ItemController.update()
 POST    /save/      		controllers.ItemController.save()
 GET     /items/delete/:id   controllers.ItemController.destroy(id : Long)
 
-# farmers
-GET     /farmers/             controllers.FarmerController.index()
-GET     /farmers/:category    controllers.FarmerController.categorie(category: String)
+# dont work, TO DO or only to compile and delete before demonstrate
+GET     /items/edit/:id     controllers.ItemController.edit(id : Long)
+POST    /items/edit         controllers.ItemController.update()
+
+# farmers as users
+# work
+GET     /farmers/          			controllers.FarmerController.index()
 GET     /farmers/create/      		controllers.FarmerController.create()
-GET     /farmers/id/:id       controllers.FarmerController.show(id : Long)
+GET     /farmers/id/:id    		    controllers.FarmerController.show(id : Long)
+POST    /farmers/save/      		controllers.FarmerController.save()
+GET     /farmers/delete/:id 	    controllers.FarmerController.destroy(id : Long)
+
+# dont work, only to compile and delete before demonstrate
+GET     /farmers/:category    controllers.FarmerController.categorie(category: String)
 GET     /farmers/edit/:id     controllers.FarmerController.edit(id : Long)
 POST    /farmers/edit         controllers.FarmerController.update()
-POST    /farmers/save/      		controllers.FarmerController.save()
-GET     /farmers/delete/:id   controllers.FarmerController.destroy(id : Long)
 
 
-
+#Only work 'Session', no access to database
 GET     /login/        controllers.SessionController.login()
 POST    /login/        controllers.SessionController.authenticate()
 GET     /logout/       controllers.SessionController.logout()
@@ -52,6 +63,11 @@ GET     /logout/       controllers.SessionController.logout()
 
 
 
+# dont work, only to compile and delete before demonstrate
+
+POST    /add/an/item                controllers.HomeController.addItem()
+POST    /cart/save/      			controllers.ShoppingCart.save()
+POST    /checkout                   controllers.ShoppingCart.goShopping()
 
 
 
@@ -61,14 +77,3 @@ GET     /logout/       controllers.SessionController.logout()
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
 
 
-
-
-
-# Authentication
-# GET         /login                           controllers.Application.login
-# POST        /login                           controllers.Application.authenticate
-# GET         /logout                          controllers.Application.logout
-POST    /add/an/item                controllers.HomeController.addItem()
-# Calculate the purchase
-POST    /cart/save/      		controllers.ShoppingCart.save()
-POST    /checkout                   controllers.ShoppingCart.goShopping()
