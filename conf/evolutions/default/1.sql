@@ -13,6 +13,14 @@ create table farmer (
   constraint pk_farmer primary key (id)
 );
 
+create table inventory_item (
+  name                          varchar(255) not null,
+  price                         double,
+  quantity                      integer,
+  img_path                      varchar(255),
+  constraint pk_inventory_item primary key (name)
+);
+
 create table item (
   id                            bigint auto_increment not null,
   name                          varchar(255),
@@ -29,6 +37,8 @@ create table item (
 # --- !Downs
 
 drop table if exists farmer;
+
+drop table if exists inventory_item;
 
 drop table if exists item;
 

@@ -15,7 +15,6 @@ public class Item extends Model{
     public String categorie;
     public String description;
     public Integer quantity;
-    
     public String color;
     public String picture;
     

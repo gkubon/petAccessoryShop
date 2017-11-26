@@ -7,6 +7,7 @@ import io.ebean.*;
 import javax.persistence.*;
 
 @Entity
+/*farmer is user*/
 public class Farmer extends Model {
    @Id
    public Long id;

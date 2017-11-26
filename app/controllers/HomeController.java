@@ -8,6 +8,24 @@ import java.util.Set;
 import models.*;
 
 import views.html.*;
+
+
+import models.InventoryItem;
+import io.ebean.*;
+import play.mvc.*;
+import play.mvc.Http.MultipartFormData;
+import play.mvc.Http.MultipartFormData.FilePart;
+import views.html.*;
+import static play.libs.Json.toJson;
+
+import java.io.*;
+import java.nio.channels.FileChannel;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+
+
+
 //import views.html.items.categorie;
 
 /**
@@ -23,11 +41,19 @@ public class HomeController extends Controller {
      * <code>GET</code> request with a path of <code>/</code>.
      */
 	public Result index() {
-        return ok(index.render());
+        List<Item> items = Item.find.all();
+        return ok(index.render(items));
+    }	
+	public Result main() {
+        return TODO;
     }
 	public Result products() {
         List<Item> items = Item.find.all();
         return ok(products.render(items));
+    }
+	
+	public  Result addItem() {
+        return TODO;
     }
     public Result categorie(String categories) {
         //Set<Item> items = Item.allItems();

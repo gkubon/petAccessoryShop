@@ -4,6 +4,9 @@
 
 # An example controller showing a sample home page
 GET     /                           controllers.HomeController.index
+
+GET     /main                           controllers.HomeController.main
+
 GET     /products/                  controllers.HomeController.products
 GET     /products/:category         controllers.HomeController.categorie(category: String)
 # An example controller showing how to use dependency injection
@@ -65,3 +68,7 @@ GET     /assets/*file               controllers.Assets.versioned(path="/public",
 # GET         /login                           controllers.Application.login
 # POST        /login                           controllers.Application.authenticate
 # GET         /logout                          controllers.Application.logout
+POST    /add/an/item                controllers.HomeController.addItem()
+# Calculate the purchase
+POST    /cart/save/      		controllers.ShoppingCart.save()
+POST    /checkout                   controllers.ShoppingCart.goShopping()
