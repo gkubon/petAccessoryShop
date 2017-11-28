@@ -33,22 +33,22 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
 				});
 			});
-	</script>
-<!-- //end-smoth-scrolling -->
-<script src="@routes.Assets.versioned("js/main.js")"></script>
-<!-- the jScrollPane script -->
-<script src="@routes.Assets.versioned("js/jquery.jscrollpane.min.js")" type="text/javascript" ></script>
-		<script type="text/javascript" id="scroll-pane">
-			$(function()
-			{
-				$('.scroll-pane').jScrollPane();
-			});
-		</script>
-<!-- //the jScrollPane script -->
-<script src="@routes.Assets.at("jss/simpleCart.min.js")"> </script>
-<script src="@routes.Assets.versioned("js/bootstrap.min.js")"></script>
 
-<!--header start here-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 </head>
 <!--header end here-->
@@ -57,21 +57,21 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <body>
 <div>
             <ul>
-                <li><a class="add-to-cart" href="#" data-name="Apple" data-price="1.22">Apple $1.22</a></li>
-                <li><a class="add-to-cart" href="#" data-name="Banana" data-price="1.33">Banana $1.33</a></li>
-                <li><a class="add-to-cart" href="#" data-name="Shoe" data-price="22.33">Shoe $22.33</a></li>
-                <li><a class="add-to-cart" href="#" data-name="Frisbee" data-price="5.22">Frisbee $5.22</a></li>
+                <li><a class="add-to-cartv" href="#" data-name="Apple" data-price="1.22">Apple $1.22</a></li>
+                <li><a class="add-to-cartv" href="#" data-name="Banana" data-price="1.33">Banana $1.33</a></li>
+                <li><a class="add-to-cartv" href="#" data-name="Shoe" data-price="22.33">Shoe $22.33</a></li>
+                <li><a class="add-to-cartv" href="#" data-name="Frisbee" data-price="5.22">Frisbee $5.22</a></li>
             </ul>
-            <button id="clear-cart">Clear Cart</button>
+            <button id="clear-cartv">Clear Cart</button>
         </div>
 
 
         <div>
-            <ul id="show-cart">
+            <ul id="show-cartv">
                 <li>???????</li>
             </ul>
-            <div>You have <span id="count-cart">X</span> items in your cart</div>
-            <div>Total Cart:$<span id="total-cart"></span></div>
+            <div>You have <span id="count-cartv">X</span> items in your cartv</div>
+            <div>Total Cart:$<span id="total-cartv"></span></div>
         </div>
 
 
@@ -79,14 +79,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <script src="@routes.Assets.at("js/shoppingCart.js")" type="text/javascript"></script>
 
         <script>
-            $(".add-to-cart").click(function(event){
+            $(".add-to-cartv").click(function(event){
                 event.preventDefault();
                 var name = $(this).attr("data-name");
                 var price = Number($(this).attr("data-price"));
                 shoppingCart.addItemToCart(name, price, 1);
                 displayCart();
             });
-            $("#clear-cart").click(function(event){
+            $("#clear-cartv").click(function(event){
                 shoppingCart.clearCart();
                 displayCart();
             });
@@ -110,26 +110,26 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         +cartArray[i].name+"'>X</button>"
                         +"</li>";
                 }
-                $("#show-cart").html(output);
-                $("#count-cart").html( shoppingCart.countCart() );
-                $("#total-cart").html( shoppingCart.totalCart() );
+                $("#show-cartv").html(output);
+                $("#count-cartv").html( shoppingCart.countCart() );
+                $("#total-cartv").html( shoppingCart.totalCart() );
             }
-            $("#show-cart").on("click", ".delete-item", function(event){
+            $("#show-cartv").on("click", ".delete-item", function(event){
                 var name = $(this).attr("data-name");
                 shoppingCart.removeItemFromCartAll(name);
                 displayCart();
             });
-            $("#show-cart").on("click", ".subtract-item", function(event){
+            $("#show-cartv").on("click", ".subtract-item", function(event){
                 var name = $(this).attr("data-name");
                 shoppingCart.removeItemFromCart(name);
                 displayCart();
             });
-            $("#show-cart").on("click", ".plus-item", function(event){
+            $("#show-cartv").on("click", ".plus-item", function(event){
                 var name = $(this).attr("data-name");
                 shoppingCart.addItemToCart(name, 0, 1);
                 displayCart();
             });
-            $("#show-cart").on("change", ".item-count", function(event){
+            $("#show-cartv").on("change", ".item-count", function(event){
                 var name = $(this).attr("data-name");
                 var count = Number($(this).val());
                 shoppingCart.setCountForItem(name, count);
@@ -231,7 +231,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<div class="search-text">
 					    <input class="serch" type="text" value="Search" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search';}"/>
 					</div>
-					<div class="cart box_1">
+					<div class="cartv box_1">
 						<a href="checkout">
 						<h3>
 							<img src="@routes.Assets.at("images/cart.png")" alt=""/>

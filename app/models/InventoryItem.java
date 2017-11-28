@@ -27,6 +27,7 @@ public class InventoryItem extends Model
         this.imgPath = imagePath;
     }
     @Id
+    public Long id;
     public String name;
     public Double price;
     public Integer quantity;

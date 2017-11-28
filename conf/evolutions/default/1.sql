@@ -3,6 +3,12 @@
 
 # --- !Ups
 
+create table cart (
+  id                            bigint auto_increment not null,
+  items                         varchar(255),
+  constraint pk_cart primary key (id)
+);
+
 create table farmer (
   id                            bigint auto_increment not null,
   email                         varchar(255),
@@ -14,11 +20,12 @@ create table farmer (
 );
 
 create table inventory_item (
-  name                          varchar(255) not null,
+  id                            bigint auto_increment not null,
+  name                          varchar(255),
   price                         double,
   quantity                      integer,
   img_path                      varchar(255),
-  constraint pk_inventory_item primary key (name)
+  constraint pk_inventory_item primary key (id)
 );
 
 create table item (
@@ -35,6 +42,8 @@ create table item (
 
 
 # --- !Downs
+
+drop table if exists cart;
 
 drop table if exists farmer;
 

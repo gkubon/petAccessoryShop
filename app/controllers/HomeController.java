@@ -2,10 +2,11 @@ package controllers;
 
 import play.mvc.*;
 
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import models.*;
+
+import play.api.db.*;
 
 import views.html.*;
 
@@ -20,10 +21,7 @@ import static play.libs.Json.toJson;
 
 import java.io.*;
 import java.nio.channels.FileChannel;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
-
 
 
 //import views.html.items.categorie;
@@ -42,8 +40,23 @@ public class HomeController extends Controller {
      */
 	public Result index() {
         List<Item> items = Item.find.all();
-        return ok(index.render(items));
-    }	
+
+        return ok(iindex.render(items));
+    }
+
+    public Result cat(String cat){
+	    List<Item> items = Item.find.all();
+	    List<Item> out = new Vector<Item>();
+
+	    for(Item it : items){
+	        if(it.categorie.equalsIgnoreCase(cat)){
+	            out.add(it);
+            }
+        }
+
+        return ok(iindex.render(out));
+    }
+
 	public Result main() {
         return TODO;
     }

@@ -4,14 +4,22 @@
 
 # An example controller showing a sample home page
 GET     /                           controllers.HomeController.index
+GET     /cat/:categ                         controllers.HomeController.cat(categ: String)
 GET     /main                           controllers.HomeController.main
+
+GET     /cart                      controllers.ShoppingCart.index
+POST     /:id                        controllers.ShoppingCart.addToCart(id : Long)
+POST     /del/:id                   controllers.ShoppingCart.deleteFromCart(id : Long)
+
+
+
+
+
 GET     /products/                  controllers.HomeController.products
 
 # dont work, TO DO or only to compile and delete before demonstrate
 
 GET     /products/:category         controllers.HomeController.categorie(category: String)
-
-
 
 
 # An example controller showing how to use dependency injection
@@ -65,9 +73,6 @@ GET     /logout/       controllers.SessionController.logout()
 
 # dont work, only to compile and delete before demonstrate
 
-POST    /add/an/item                controllers.HomeController.addItem()
-POST    /cart/save/      			controllers.ShoppingCart.save()
-POST    /checkout                   controllers.ShoppingCart.goShopping()
 
 
 
