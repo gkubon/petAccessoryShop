@@ -137,7 +137,7 @@
                                     </button>
                                   </form>
                                 }else {
-                                  <form method="post" action="@routes.HomeController.login()" class="inline">
+                                  <form method="get" action="@routes.HomeController.login()" class="inline">
                                     <input type="hidden" name="extra_submit_param" value="extra_submit_value">
                                     <button type="submit" name="submit_param" value="submit_value" class="link-button">
                                     @item.name
