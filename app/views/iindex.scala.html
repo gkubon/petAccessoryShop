@@ -40,12 +40,18 @@
                 <a class="nav-link" href="#">Hello @name</a>
               </li>
               <li class="nav-item">
+                <a class="nav-link" href="@routes.HomeController.index()">Logout</a>
+              </li>
+              <li class="nav-item">
                 <a class="nav-link" href="@routes.HomeController.indexLogged(isLogged)">Home</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="@routes.ShoppingCart.index(isLogged)">Cart</a>
               </li>
             }else {
+              <li class="nav-item">
+                <a class="nav-link" href="@routes.HomeController.register()">Register</a>
+              </li>
               <li class="nav-item">
                 <a class="nav-link" href="@routes.HomeController.login()">Login</a>
               </li>

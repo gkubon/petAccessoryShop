@@ -58,6 +58,9 @@ public class HomeController extends Controller {
 	    return ok(iindex.render(items,ID,Farmer.find.byId(ID).email));
     }
 
+
+
+
     public Result cat(String cat,Long ID){
 	    List<Item> items = Item.find.all();
 	    List<Item> out = new Vector<Item>();
@@ -81,6 +84,12 @@ public class HomeController extends Controller {
         return ok(loginn.render(loginForm));
     }
 
+    public Result register(){
+        Farmer farmer = new Farmer();
+        Form<Farmer> registerForm = formFactory.form(Farmer.class).fill(farmer);
+        return ok(register.render(registerForm));
+    }
+
     public Result loginPost(){
         Form<Farmer> userForm = formFactory.form(Farmer.class).bindFromRequest();
         List<Farmer> farmers = Farmer.find.all();
@@ -92,6 +101,33 @@ public class HomeController extends Controller {
         }
         List<Item> items = Item.find.all();
         return ok(iindex.render(items,id,userForm.get().email));
+    }
+
+    public Result registerPost(){
+        Form<Farmer> userForm = formFactory.form(Farmer.class).bindFromRequest();
+        List<Farmer> farmers = Farmer.find.all();
+        Long id = Long.valueOf(0);
+        for(Farmer f: farmers){
+            if(f.email.equals(userForm.get().email)){
+                Farmer farmer = new Farmer();
+                Form<Farmer> loginForm = formFactory.form(Farmer.class).fill(farmer);
+                return ok(loginn.render(loginForm));
+            }
+            id = f.id;
+        }
+
+        id=id+1;
+        String s = "INSERT INTO farmer VALUES (:id,:mail,:pass,:mail,null,null)";
+        SqlUpdate update = Ebean.createSqlUpdate(s);
+        update.setParameter("id", id);
+        update.setParameter("mail",userForm.get().email);
+        update.setParameter("pass",userForm.get().password);
+        int count = Ebean.execute(update);
+
+        Farmer farmer = new Farmer();
+        Form<Farmer> loginForm = formFactory.form(Farmer.class).fill(farmer);
+        return ok(loginn.render(loginForm));
+
     }
 
 

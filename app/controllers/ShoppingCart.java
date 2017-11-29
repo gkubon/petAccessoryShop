@@ -13,8 +13,8 @@ import play.mvc.*;
 import views.html.cartv;
 import views.html.iindex;
 
-import java.util.List;
-import java.util.Vector;
+import java.text.DecimalFormat;
+import java.util.*;
 import java.util.concurrent.CompletionException;
 import java.util.concurrent.CompletionStage;
 
@@ -130,5 +130,4 @@ public class ShoppingCart extends Controller
 
         return ok(cartv.render(out,id, Farmer.find.byId(id).email,price));
     }
-
 }

@@ -36,10 +36,10 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
+            <li class="nav-item  active">
               <a class="nav-link" href="@routes.HomeController.register()">Register</a>
             </li>
-            <li class="nav-item active">
+            <li class="nav-item">
               <a class="nav-link" href="#">Login</a>
             </li>
             <li class="nav-item">
@@ -101,11 +101,11 @@
               <span class="sr-only">Next</span>
             </a>
           </div>
-          @helper.form(action = routes.HomeController.loginPost()){
+          @helper.form(action = routes.HomeController.registerPost()){
             @helper.inputText(user("email"))
             @helper.inputText(user("password"))
             <button type="submit" name="submit_param" value="submit_value" class="link-button">
-              Login
+              Register
             </button>
           }
 

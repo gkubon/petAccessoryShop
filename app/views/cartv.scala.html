@@ -12,6 +12,7 @@
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://www.paypalobjects.com/api/checkout.js"></script>
 
 
     <title>Pet accesory shop!</title>
@@ -25,7 +26,8 @@
   </head>
 
   <body>
-      <!-- Navigation -->
+
+    <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
       <div class="container">
         @if(isLogged>0){
@@ -41,6 +43,9 @@
         @if(isLogged>0){
           <li class="nav-item">
             <a class="nav-link" href="#">Hello @name</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="@routes.HomeController.index()">Logout</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="@routes.HomeController.indexLogged(isLogged)">Home</a>
@@ -85,6 +90,7 @@
           <a href='@routes.HomeController.cat("Dog",isLogged)' class="list-group-item">Dogs</a>
           <a href='@routes.HomeController.cat("Cat",isLogged)' class="list-group-item">Cats</a>
           <a href='@routes.HomeController.cat("Small animals",isLogged)' class="list-group-item">Small animals</a>
+            <div id="paypal-button-container" class="list-group-item"></div>
           </div>
 
         </div>
@@ -118,7 +124,6 @@
               <span class="sr-only">Next</span>
             </a>
           </div>
-
           <div class="row">
           @for(item <- items){
             <div class="col-lg-4 col-md-6 mb-4">
@@ -126,6 +131,7 @@
                 <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
                 <div class="card-body">
                   <h4 class="card-title">
+
                   @if(isLogged>0){
                     <form method="post" action="@routes.ShoppingCart.deleteFromCart(isLogged,item.id)" class="inline">
                       <input type="hidden" name="extra_submit_param" value="extra_submit_value">
@@ -141,7 +147,13 @@
                       </button>
                     </form>
                   }
-                  <div id="paypal-button-container" style="width: 200px"></div>
+
+//                    @*</div>*@
+
+
+
+
+
                   </h4>
                   <h5>$@item.price</h5>
                   <p class="card-text">@item.description</p>
@@ -176,46 +188,53 @@
     <script src='@routes.Assets.at("javascripts/bootstrap.bundle.min.js")'></script>
     <script src="https://www.paypalobjects.com/api/checkout.js"></script>
     <script>
-        paypal.Button.render({
 
-          env: 'sandbox',//'production',
+    // Render the PayPal button
 
-          client: {
-            sandbox:    'ATEwrvyljSsQ-b-vRJPsmeVr5fEZuJb5TKDrAGLLKYTioWZZvw--2dWwxkJ9tM0JrSjOBbEgbD9gq3k3',
-            production: 'ASBjwjB_ui8hjv-ckslkCoNM9eIkLYuICJDUzUn5OCTOyn6bcl4y36_A6zbCxMuSR4ciWktin4VR9Puv'
-          },
+    paypal.Button.render({
 
-          commit: true, // Show a 'Pay Now' button
+      // Set your environment
 
-          style: {
-            label: 'checkout',
-            size: 'small',
-            shape: 'pill',
-            color: 'gold'
-          },
+      env: 'sandbox', // sandbox | production
 
-          payment: function(data, actions) {
-            return actions.payment.create({
-              payment: {
-                transactions: [
-                  {
-                    amount: { total: '100.0', currency: 'USD' }
-                  }
-                ]
+      // Specify the style of the button
+
+      style: {
+        label: 'checkout',
+        size:  'small',    // small | medium | large | responsive
+        shape: 'pill',     // pill | rect
+        color: 'gold'      // gold | blue | silver | black
+      },
+
+      // PayPal Client IDs - replace with your own
+      // Create a PayPal app: https://developer.paypal.com/developer/applications/create
+
+      client: {
+        sandbox:    'ATEwrvyljSsQ-b-vRJPsmeVr5fEZuJb5TKDrAGLLKYTioWZZvw--2dWwxkJ9tM0JrSjOBbEgbD9gq3k3',
+        production: 'ASBjwjB_ui8hjv-ckslkCoNM9eIkLYuICJDUzUn5OCTOyn6bcl4y36_A6zbCxMuSR4ciWktin4VR9Puv'
+      },
+
+      payment: function(data, actions) {
+        return actions.payment.create({
+          payment: {
+            transactions: [
+              {
+                amount: { total: @price, currency: 'USD' }
               }
-            });
-          },
-
-          onAuthorize: function(data, actions) {
-
-            // Make a call to the REST api to execute the payment
-            return actions.payment.execute().then(function() {
-              window.alert('Payment Complete!');
-            });
+            ]
           }
+        });
+      },
 
-        }, '#paypal-button-container');
-    </script>
+      onAuthorize: function(data, actions) {
+        return actions.payment.execute().then(function() {
+          window.alert('Payment Complete!');
+        });
+      }
+
+    }, '#paypal-button-container');
+
+</script>
   </body>
 
 </html>
