@@ -21,6 +21,8 @@ libraryDependencies += "mysql" % "mysql-connector-java" % "5.1.41"
 libraryDependencies += jdbc
 libraryDependencies += ehcache
 libraryDependencies += javaWs
+libraryDependencies += jcache
+libraryDependencies += "org.jsr107.ri" % "cache-annotations-ri-guice" % "1.0.0"
 
 // Make verbose tests
 testOptions in Test := Seq(Tests.Argument(TestFrameworks.JUnit, "-a", "-v"))

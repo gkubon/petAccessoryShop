@@ -1,93 +1,134 @@
 package controllers;
 
-import io.ebean.annotation.Cache;
-import models.InventoryItem;
+
+import akka.Done;
+import models.Farmer;
 import models.Item;
 import models.Cart;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.node.ArrayNode;
-import com.fasterxml.jackson.databind.node.ObjectNode;
+
 import io.ebean.*;
-import play.mvc.BodyParser;
-import play.mvc.Controller;
-import play.mvc.Result;
-import play.data.Form;
-import play.libs.Json;
+
+import play.cache.*;
+import play.mvc.*;
 import views.html.cartv;
 import views.html.iindex;
 
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import java.util.Vector;
+import java.util.concurrent.CompletionException;
+import java.util.concurrent.CompletionStage;
 
-/**
- * Created with IntelliJ IDEA.
- * User: epanahi
- * Date: 12/2/12
- * Time: 8:01 PM
- * To change this template use File | Settings | File Templates.
- */
+import javax.cache.Cache;
+import javax.cache.CacheManager;
+import javax.cache.Caching;
+import javax.cache.configuration.MutableConfiguration;
+import javax.cache.spi.CachingProvider;
+import javax.inject.Inject;
+
+
 public class ShoppingCart extends Controller
 {
-    public Result index() {
-        List<Item> items = Item.find.all();
+
+    public Result index(Long id) {
+
+        if(Cart.find.byId(id)==null) {
+            String s = "INSERT INTO cart VALUES (:id,'0')";
+            SqlUpdate update = Ebean.createSqlUpdate(s);
+            update.setParameter("id", id);
+            int count = Ebean.execute(update);
+        }
+
+        List<Cart> carts = Cart.find.all();
+        String items = "-1";
+        for(Cart cart : carts){
+            if(cart.id==id){
+                items = cart.items;
+            }
+        }
+
+        Item.find.all();
         List<Item> out = new Vector<Item>();
-        Cart cart = Cart.find.byId((long)1);
 
-        String[] ids = cart.items.split(",");
+        String[] ids = items.split(",");
 
-        for(Item item : items){
+        for(Item item : Item.find.all()){
             for(String st : ids){
                 if(item.id==Long.parseLong(st)){
                     out.add(item);
                 }
             }
         }
+        Double price = Double.valueOf(0);
+        for(Item it: out){
+            price=+it.price;
+        }
 
-        return ok(cartv.render(out));
+        return ok(cartv.render(out,id,Farmer.find.byId(id).email,price));
+
+       // Long abc = (long)Cart.find.all().size();
+       // Cart cart = Cart.find.byId(abc);
+       // String s = "INSERT INTO cart VALUES (:id,'0')";
+       // SqlUpdate update = Ebean.createSqlUpdate(s);
+       // update.setParameter("id",id);
+       // int count = Ebean.execute(update);
     }
 
-    public Result addToCart(Long id){
-        String s = "UPDATE cart SET items= :items WHERE id = 1";
+    public Result addToCart(Long id,Long item){
+
+        if(Cart.find.byId(id)==null) {
+            String s = "INSERT INTO cart VALUES (:id,'0')";
+            SqlUpdate update = Ebean.createSqlUpdate(s);
+            update.setParameter("id", id);
+            int count = Ebean.execute(update);
+        }
+
+        String s = "UPDATE cart SET items= :items WHERE id = :id";
         SqlUpdate update = Ebean.createSqlUpdate(s);
-        update.setParameter("items",Cart.find.byId((long) 1).items.concat(","+String.valueOf(id)));
+        update.setParameter("items",Cart.find.byId(id).items.concat(","+String.valueOf(item)));
+        update.setParameter("id",id);
         int count = Ebean.execute(update);
         List<Item> items = Item.find.all();
         List<Item> out = new Vector<Item>();
-        Cart cart = Cart.find.byId((long)1);
+        Cart cart = Cart.find.byId(id);
 
         String[] ids = cart.items.split(",");
 
-        for(Item item : items){
+        for(Item itm : items){
             for(String st : ids){
-                if(item.id==Long.parseLong(st)){
-                    out.add(item);
+                if(itm.id==Long.parseLong(st)){
+                    out.add(itm);
                 }
             }
         }
-        return ok(cartv.render(out));
+        //return ok(cartv.render(out,id,Farmer.find.byId(id).email));
+        return ok(iindex.render(Item.find.all(),id,Farmer.find.byId(id).email));
     }
 
-    public Result deleteFromCart(Long id){
-        String s = "UPDATE cart SET items= :items WHERE id = 1";
+    public Result deleteFromCart(Long id, Long item){
+        String s = "UPDATE cart SET items= :items WHERE id = :id";
         SqlUpdate update = Ebean.createSqlUpdate(s);
-        update.setParameter("items",Cart.find.byId((long) 1).items.replaceFirst(String.valueOf(id),"0"));
+        update.setParameter("items",Cart.find.byId(id).items.replaceFirst(String.valueOf(item),"0"));
+        update.setParameter("id",id);
         int count = Ebean.execute(update);
         List<Item> items = Item.find.all();
         List<Item> out = new Vector<Item>();
-        Cart cart = Cart.find.byId((long)1);
+        Cart cart = Cart.find.byId(id);
 
         String[] ids = cart.items.split(",");
 
-        for(Item item : items){
+        for(Item itm : items){
             for(String st : ids){
-                if(item.id==Long.parseLong(st)){
-                    out.add(item);
+                if(itm.id==Long.parseLong(st)){
+                    out.add(itm);
                 }
             }
         }
-        return ok(cartv.render(out));
+        Double price = Double.valueOf(0);
+        for(Item it: out){
+            price=+it.price;
+        }
+
+        return ok(cartv.render(out,id, Farmer.find.byId(id).email,price));
     }
 
 }

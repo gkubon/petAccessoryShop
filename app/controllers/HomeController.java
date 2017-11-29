@@ -1,5 +1,6 @@
 package controllers;
 
+import play.data.FormFactory;
 import play.mvc.*;
 
 import java.util.*;
@@ -9,7 +10,8 @@ import models.*;
 import play.api.db.*;
 
 import views.html.*;
-
+import play.data.Form;
+import play.data.Form.*;
 
 import models.InventoryItem;
 import io.ebean.*;
@@ -17,6 +19,9 @@ import play.mvc.*;
 import play.mvc.Http.MultipartFormData;
 import play.mvc.Http.MultipartFormData.FilePart;
 import views.html.*;
+
+import javax.inject.Inject;
+
 import static play.libs.Json.toJson;
 
 import java.io.*;
@@ -38,13 +43,22 @@ public class HomeController extends Controller {
      * this method will be called when the application receives a
      * <code>GET</code> request with a path of <code>/</code>.
      */
+    @Inject
+    FormFactory formFactory;
+
 	public Result index() {
         List<Item> items = Item.find.all();
 
-        return ok(iindex.render(items));
+        return ok(iindex.render(items,(long)0,"zuza"));
     }
 
-    public Result cat(String cat){
+    public Result indexLogged(Long ID){
+	    List<Item> items = Item.find.all();
+
+	    return ok(iindex.render(items,ID,Farmer.find.byId(ID).email));
+    }
+
+    public Result cat(String cat,Long ID){
 	    List<Item> items = Item.find.all();
 	    List<Item> out = new Vector<Item>();
 
@@ -53,13 +67,34 @@ public class HomeController extends Controller {
 	            out.add(it);
             }
         }
+        String abc = "zuz";
+        if(ID!=0){
+            abc = Farmer.find.byId(ID).email;
+        }
 
-        return ok(iindex.render(out));
+        return ok(iindex.render(out,ID,abc));
     }
 
-	public Result main() {
-        return TODO;
+    public Result login(){
+        Farmer farmer = new Farmer();
+        Form<Farmer> loginForm = formFactory.form(Farmer.class).fill(farmer);
+        return ok(loginn.render(loginForm));
     }
+
+    public Result loginPost(){
+        Form<Farmer> userForm = formFactory.form(Farmer.class).bindFromRequest();
+        List<Farmer> farmers = Farmer.find.all();
+        Long id = Long.valueOf(0);
+        for(Farmer f : farmers){
+            if(f.email.equals(userForm.get().email)&&f.password.equals(userForm.get().password)){
+                id = f.id;
+            }
+        }
+        List<Item> items = Item.find.all();
+        return ok(iindex.render(items,id,userForm.get().email));
+    }
+
+
 	public Result products() {
         List<Item> items = Item.find.all();
         return ok(products.render(items));
