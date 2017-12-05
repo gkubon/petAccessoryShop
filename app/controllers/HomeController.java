@@ -108,7 +108,7 @@ public class HomeController extends Controller {
         return ok(iindex.render(items,id,userForm.get().email,searchForm));
     }
 
-    public Result searchPost() {
+    public Result searchPost(Long ID) {
         Form<InventoryItem> searchForm = formFactory.form(InventoryItem.class).bindFromRequest();
         List<Item> out = new Vector<>();
         List<Item> all = Item.find.all();
@@ -119,7 +119,7 @@ public class HomeController extends Controller {
         }
 
 
-        return ok(iindex.render(out,Long.valueOf(1),Farmer.find.byId(Long.valueOf(1)).email,searchForm));
+        return ok(iindex.render(out,ID,Farmer.find.byId(ID).email,searchForm));
 
 
     }
