@@ -22,6 +22,51 @@ POST    /search/bar:id                             controllers.HomeController.se
 
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
 
+
+
+
+# items
+# work
+GET     /items/             controllers.ItemController.index()
+GET     /items/:category    controllers.ItemController.categorie(category: String)
+GET     /create/      		controllers.ItemController.create()
+GET     /items/id/:id       controllers.ItemController.show(id : Long)
+POST    /save/      		controllers.ItemController.save()
+GET     /items/delete/:id   controllers.ItemController.destroy(id : Long)
+
+# dont work, TO DO or only to compile and delete before demonstrate
+GET     /items/edit/:id     controllers.ItemController.edit(id : Long)
+POST    /items/edit         controllers.ItemController.update()
+
+# farmers as users
+# work
+GET     /farmers/          			controllers.FarmerController.index()
+GET     /farmers/create/      		controllers.FarmerController.create()
+GET     /farmers/id/:id    		    controllers.FarmerController.show(id : Long)
+POST    /farmers/save/      		controllers.FarmerController.save()
+GET     /farmers/delete/:id 	    controllers.FarmerController.destroy(id : Long)
+
+# dont work, only to compile and delete before demonstrate
+GET     /farmers/:category    controllers.FarmerController.categorie(category: String)
+GET     /farmers/edit/:id     controllers.FarmerController.edit(id : Long)
+POST    /farmers/edit         controllers.FarmerController.update()
+
+
+#Only work 'Session', no access to database
+GET     /login/        controllers.SessionController.login()
+POST    /login/        controllers.SessionController.authenticate()
+GET     /logout/       controllers.SessionController.logout()
+
+
+
+
+# dont work, only to compile and delete before demonstrate
+
+
+
+
+
+
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
 
