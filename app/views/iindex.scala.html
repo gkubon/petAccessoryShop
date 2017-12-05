@@ -36,8 +36,10 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <form>
-            <li><input name="searchbar" type="text" class="search-query" placeholder="Search"></li>
-            <li><button type="submit" onclick="@routes.HomeController.cat("Cat",isLogged)" class="btn btn-primary btn-sm">Search</button></li>
+              <li>
+                <input name="searchbar" type="text" class="search-query" placeholder="Search">
+                <button type="submit" onclick="/cat/Cat0" class="btn btn-primary btn-sm" style="margin-bottom:4px;">Search</button>
+              </li>
             </form>
             @if(isLogged>0){
               <li class="nav-item">
