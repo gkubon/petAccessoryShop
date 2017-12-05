@@ -132,21 +132,35 @@
                 <div class="card-body">
                   <h4 class="card-title">
 
-                  @if(isLogged>0){
-                    <form method="post" action="@routes.ShoppingCart.deleteFromCart(isLogged,item.id)" class="inline">
-                      <input type="hidden" name="extra_submit_param" value="extra_submit_value">
-                      <button type="submit" name="submit_param" value="submit_value" class="link-button">
-                      @item.name
-                      </button>
-                    </form>
-                  }else {
-                    <form method="post" action="@routes.HomeController.login()" class="inline">
-                      <input type="hidden" name="extra_submit_param" value="extra_submit_value">
-                      <button type="submit" name="submit_param" value="submit_value" class="link-button">
-                      @item.name
-                      </button>
-                    </form>
-                  }
+                    @if(isLogged>0){
+                      <form method="post" action="@routes.ShoppingCart.deleteFromCart(isLogged,item.id)" class="inline">
+                        <div class="card-body">
+                          <h4 class="card-title">
+
+                            <input type="hidden" name="extra_submit_param" value="extra_submit_value">
+
+                            @item.name
+
+                          </h4>
+                          <h5>$@item.price</h5>
+                          <p class="card-text">@item.description</p>
+                        </div><div class="card-footer clearfix" style="padding-bottom: 10px;"><button style="float: right;" type="submit" name="submit_param" value="submit_value" class="btn btn-primary">Delete from cart</button></div>
+                      </form>
+                    }else{
+                      <form method="get" action="@routes.HomeController.login()" class="inline">
+                        <div class="card-body">
+                          <h4 class="card-title">
+
+                            <input type="hidden" name="extra_submit_param" value="extra_submit_value">
+
+                            @item.name
+
+                          </h4>
+                          <h5>$@item.price</h5>
+                          <p class="card-text">@item.description</p>
+                        </div><div class="card-footer clearfix" style="padding-bottom: 10px;"><button style="float: right;" type="submit" name="submit_param" value="submit_value" class="btn btn-primary">Add to cart</button></div>
+                      </form>
+                    }
 
 //                    @*</div>*@
 
