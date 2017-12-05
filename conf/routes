@@ -7,8 +7,6 @@ GET     /                           controllers.HomeController.index
 GET     /logged/:id          controllers.HomeController.indexLogged(id: Long)
 GET     /cat/:categ:id         controllers.HomeController.cat(categ: String, id: Long)
 
-GET     /search:id/:word         controllers.HomeController.search(word: String, id: Long)
-
 
 GET     /cart:id                      controllers.ShoppingCart.index(id: Long)
 POST     /:id                        controllers.ShoppingCart.addToCart(id : Long, item: Long)
@@ -17,6 +15,7 @@ GET      /log/in                         controllers.HomeController.login
 POST     /log/in                         controllers.HomeController.loginPost
 GET     /reg/in                             controllers.HomeController.register
 POST    /reg/in                             controllers.HomeController.registerPost
+POST    /search:id                             controllers.HomeController.searchPost(id : Long)
 
 
 

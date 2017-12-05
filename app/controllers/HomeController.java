@@ -48,37 +48,18 @@ public class HomeController extends Controller {
 
 	public Result index() {
         List<Item> items = Item.find.all();
-
-        return ok(iindex.render(items,(long)0,"zuza"));
+        InventoryItem inv = new InventoryItem();
+        Form<InventoryItem> searchForm = formFactory.form(InventoryItem.class).fill(inv);
+        return ok(iindex.render(items,(long)0,"zuza",searchForm));
     }
 
     public Result indexLogged(Long ID){
 	    List<Item> items = Item.find.all();
-
-	    return ok(iindex.render(items,ID,Farmer.find.byId(ID).email));
+        InventoryItem inv = new InventoryItem();
+        Form<InventoryItem> searchForm = formFactory.form(InventoryItem.class).fill(inv);
+	    return ok(iindex.render(items,ID,Farmer.find.byId(ID).email,searchForm));
     }
 
-
-
-
-
-    
-    public Result search(String cat,Long ID) {
-    	List<Item> items = Item.find.all();
-    	List<Item> out = new Vector<Item>();
-
-    	for(Item it : items){
-    		if(it.name.contains(cat)){
-    			out.add(it);
-    		}
-    	}
-    	String abc = "zuz";
-    	if(ID!=0){
-    		abc = Farmer.find.byId(ID).email;
-    	}
-
-    	return ok(iindex.render(out,ID,abc));
-    }
     
     public Result cat(String cat,Long ID){
 	    List<Item> items = Item.find.all();
@@ -94,7 +75,10 @@ public class HomeController extends Controller {
             abc = Farmer.find.byId(ID).email;
         }
 
-        return ok(iindex.render(out,ID,abc));
+
+        InventoryItem inv = new InventoryItem();
+        Form<InventoryItem> searchForm = formFactory.form(InventoryItem.class).fill(inv);
+        return ok(iindex.render(out,ID,abc,searchForm));
     }
 
     public Result login(){
@@ -119,7 +103,27 @@ public class HomeController extends Controller {
             }
         }
         List<Item> items = Item.find.all();
-        return ok(iindex.render(items,id,userForm.get().email));
+        InventoryItem inv = new InventoryItem();
+        Form<InventoryItem> searchForm = formFactory.form(InventoryItem.class).fill(inv);
+        return ok(iindex.render(items,id,userForm.get().email,searchForm));
+    }
+
+    public Result searchPost(Long ID) {
+        Form<InventoryItem> searchForm = formFactory.form(InventoryItem.class).bindFromRequest();
+        List<Item> out = new Vector<>();
+        List<Item> all = Item.find.all();
+        for(Item it : all){
+            if(it.name.contains(searchForm.get().name)||it.categorie.contains(searchForm.get().name)||it.description.contains(searchForm.get().name)){
+                out.add(it);
+            }
+        }
+        InventoryItem inv = new InventoryItem();
+        Form<InventoryItem> searchForm = formFactory.form(InventoryItem.class).fill(inv);
+
+
+        return ok(iindex.render(out,ID,Farmer.find.byId(ID).email,searchForm));
+
+
     }
 
     public Result registerPost(){
@@ -134,6 +138,8 @@ public class HomeController extends Controller {
             }
             id = f.id;
         }
+
+
 
         id=id+1;
         String s = "INSERT INTO farmer VALUES (:id,:mail,:pass,:mail,null,null)";

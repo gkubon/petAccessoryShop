@@ -19,13 +19,6 @@ import java.util.Map;
 @Entity
 public class InventoryItem extends Model
 {
-    public InventoryItem(String name, Double price, Integer quantity, String imagePath)
-    {
-        this.name = name;
-        this.price = price;
-        this.quantity = quantity;
-        this.imgPath = imagePath;
-    }
     @Id
     public Long id;
     public String name;

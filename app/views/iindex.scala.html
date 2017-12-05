@@ -1,4 +1,9 @@
-@(items: List[Item],isLogged: Long,name: String)
+@(items: List[Item],isLogged: Long,name: String,search: Form[InventoryItem])
+
+
+@import models.InventoryItem
+@import play.data.Form
+@import views.html.helper._
 
 <!DOCTYPE html>
 <html lang="en">
@@ -35,12 +40,12 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
-            <form>
               <li>
-                <input name="searchbar" type="text" class="search-query" placeholder="Search">
-                <button type="submit" onclick='"/search"@isLogged"/"' class="btn btn-primary btn-sm" style="margin-bottom:4px;">Search</button>
+              @helper.form(action = routes.HomeController.searchPost(isLogged)){
+                @helper.inputText(search("name"))
+                <button type="submit" type="submit" name="submit_param" value="submit_value" class="btn btn-primary btn-sm" style="margin-bottom:4px;">Search</button>
               </li>
-            </form>
+
             @if(isLogged>0){
               <li class="nav-item">
                 <a class="nav-link" href="#">Hello @name</a>
