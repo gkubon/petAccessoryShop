@@ -15,7 +15,7 @@ GET      /log/in                         controllers.HomeController.login
 POST     /log/in                         controllers.HomeController.loginPost
 GET     /reg/in                             controllers.HomeController.register
 POST    /reg/in                             controllers.HomeController.registerPost
-POST    /search                             controllers.HomeController.searchPost
+POST    /search/bar                             controllers.HomeController.searchPost
 
 
 
