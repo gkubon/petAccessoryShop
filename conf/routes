@@ -15,7 +15,7 @@ GET      /log/in                         controllers.HomeController.login
 POST     /log/in                         controllers.HomeController.loginPost
 GET     /reg/in                             controllers.HomeController.register
 POST    /reg/in                             controllers.HomeController.registerPost
-POST    /search:id                             controllers.HomeController.searchPost(id : Long)
+POST    /search                             controllers.HomeController.searchPost
 
 
 

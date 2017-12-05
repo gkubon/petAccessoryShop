@@ -41,7 +41,7 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
               <li>
-              @helper.form(action = routes.HomeController.searchPost(isLogged)) {
+              @helper.form(action = routes.HomeController.searchPost()) {
                 @helper.inputText(search("name"))
                 <button type="submit" type="submit" name="submit_param" class="btn btn-primary btn-sm" style="margin-bottom: 4px;">
                   Search</button>
