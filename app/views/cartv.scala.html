@@ -129,8 +129,6 @@
             <div class="col-lg-4 col-md-6 mb-4">
               <div class="card h-100">
                 <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                <div class="card-body">
-                  <h4 class="card-title">
 
                     @if(isLogged>0){
                       <form method="post" action="@routes.ShoppingCart.deleteFromCart(isLogged,item.id)" class="inline">
@@ -161,17 +159,6 @@
                         </div><div class="card-footer clearfix" style="padding-bottom: 10px;"><button style="float: right;" type="submit" name="submit_param" value="submit_value" class="btn btn-primary">Add to cart</button></div>
                       </form>
                     }
-
-//                    @*</div>*@
-
-
-
-
-
-                  </h4>
-                  <h5>$@item.price</h5>
-                  <p class="card-text">@item.description</p>
-                </div>
 
               </div>
             </div>
