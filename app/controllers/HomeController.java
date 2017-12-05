@@ -162,32 +162,9 @@ public class HomeController extends Controller {
 
     }
 
-	public Result products() {
-        List<Item> items = Item.find.all();
-        return ok(products.render(items));
+    public Result product(Long item, Long ID) {
+        InventoryItem inv = new InventoryItem();
+        Form<InventoryItem> searchForm = formFactory.form(InventoryItem.class).fill(inv);
+        return ok(iitem.render(Item.find.byId(item), ID, Farmer.find.byId(ID).email, searchForm));
     }
-	
-	public  Result addItem() {
-        return TODO;
-    }
-    public Result categorie(String categories) {
-        //Set<Item> items = Item.allItems();
-    	//Set<Item> item = Item.findByCategorie(categories);
-    	/*Set<Item> item = Item.findByCategorie(categories);
-    	if (item==null){
-    		return notFound("categorie not found");
-    	}
-        return ok(categorie.render(item));
-*/
-    	//return ok( "TODO");
-        return TODO;
-    }
-    public Result welcome(String name, String lastname) {
-        return ok( "HI , "  +name + "  " + lastname+" Welcome to PETSHOPAPP");
-    }
-    public Result basket() {
-        return ok( "Basket is empty");
-    }
-
-
 }
