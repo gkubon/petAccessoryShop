@@ -113,7 +113,7 @@ public class HomeController extends Controller {
         List<Item> out = new Vector<>();
         List<Item> all = Item.find.all();
         for(Item it : all){
-            if(it.name.contains(searchForm.get().name)||it.categorie.contains(searchForm.get().name)||it.description.contains(searchForm.get().name)){
+            if(it.name.toLowerCase().contains(searchForm.get().name.toLowerCase())||it.categorie.toLowerCase().contains(searchForm.get().name.toLowerCase())||it.description.toLowerCase().contains(searchForm.get().name.toLowerCase())){
                 out.add(it);
             }
         }

@@ -41,11 +41,10 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
               <li>
-              @helper.form(action = routes.HomeController.searchPost()) {
-                @helper.inputText(search("name"))
-                <button type="submit" class="btn btn-primary btn-sm" style="margin-bottom: 4px;">
-                  Search</button>
-              }
+                <form action="/search/bar" method="post">
+                  <textarea name="name"></textarea>
+                  <input type="submit" value="Отправить">
+                </form>
               </li>
 
             @if(isLogged>0){
