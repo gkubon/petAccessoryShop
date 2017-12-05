@@ -3,12 +3,15 @@ package controllers;
 
 import akka.Done;
 import models.Farmer;
+import models.InventoryItem;
 import models.Item;
 import models.Cart;
 
 import io.ebean.*;
 
 import play.cache.*;
+import play.data.Form;
+import play.data.FormFactory;
 import play.mvc.*;
 import views.html.cartv;
 import views.html.iindex;
@@ -26,8 +29,12 @@ import javax.cache.spi.CachingProvider;
 import javax.inject.Inject;
 
 
+
 public class ShoppingCart extends Controller
 {
+
+    @Inject
+    FormFactory formFactory;
 
     public Result index(Long id) {
 
@@ -100,8 +107,10 @@ public class ShoppingCart extends Controller
                 }
             }
         }
+        InventoryItem inv = new InventoryItem();
+        Form<InventoryItem> searchForm = formFactory.form(InventoryItem.class).fill(inv);
         //return ok(cartv.render(out,id,Farmer.find.byId(id).email));
-        return ok(iindex.render(Item.find.all(),id,Farmer.find.byId(id).email));
+        return ok(iindex.render(Item.find.all(),id,Farmer.find.byId(id).email,searchForm));
     }
 
     public Result deleteFromCart(Long id, Long item){

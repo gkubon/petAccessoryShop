@@ -117,8 +117,6 @@ public class HomeController extends Controller {
                 out.add(it);
             }
         }
-        InventoryItem inv = new InventoryItem();
-        Form<InventoryItem> searchForm = formFactory.form(InventoryItem.class).fill(inv);
 
 
         return ok(iindex.render(out,ID,Farmer.find.byId(ID).email,searchForm));
