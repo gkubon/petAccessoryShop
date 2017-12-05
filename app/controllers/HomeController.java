@@ -117,10 +117,11 @@ public class HomeController extends Controller {
                 out.add(it);
             }
         }
-
-
-        return ok(iindex.render(out,ID,Farmer.find.byId(ID).email,searchForm));
-
+        if(ID==0){
+            return ok(iindex.render(out,ID,"zuz",searchForm));
+        }else{
+            return ok(iindex.render(out,ID,Farmer.find.byId(ID).email,searchForm));
+        }
 
     }
 
