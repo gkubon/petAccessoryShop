@@ -35,8 +35,10 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
-            <li><input type="text" class="search-query" placeholder="Search"></li>
+            <form>
+            <li><input name="searchbar" type="text" class="search-query" placeholder="Search"></li>
             <li><button type="submit" onclick="@routes.HomeController.cat("Cat",isLogged)" class="btn btn-primary btn-sm">Search</button></li>
+            </form>
             @if(isLogged>0){
               <li class="nav-item">
                 <a class="nav-link" href="#">Hello @name</a>
@@ -125,32 +127,40 @@
           </div>
 
           <div class="row">
-            @for(item <- items){
+                @for(item <- items){
                 <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="card h-100">
-                        <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                        <div class="card-body">
-                            <h4 class="card-title">
-                                @if(isLogged>0){
-                                  <form method="post" action="@routes.ShoppingCart.addToCart(isLogged,item.id)" class="inline">
-                                    <input type="hidden" name="extra_submit_param" value="extra_submit_value">
-                                    <button type="submit" name="submit_param" value="submit_value" class="link-button">
-                                    @item.name
-                                    </button>
-                                  </form>
-                                }else {
-                                  <form method="get" action="@routes.HomeController.login()" class="inline">
-                                    <input type="hidden" name="extra_submit_param" value="extra_submit_value">
-                                    <button type="submit" name="submit_param" value="submit_value" class="link-button">
-                                    @item.name
-                                    </button>
-                                  </form>
-                                }
-                            </h4>
-                            <h5>$@item.price</h5>
-                            <p class="card-text">@item.description</p>
-                        </div>
 
+                   <div class="card h-100">
+                        <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+                     @if(isLogged>0){
+                     <form method="post" action="@routes.ShoppingCart.addToCart(isLogged,item.id)" class="inline">
+                       <div class="card-body">
+                         <h4 class="card-title">
+
+                           <input type="hidden" name="extra_submit_param" value="extra_submit_value">
+
+                           @item.name
+
+                         </h4>
+                         <h5>$@item.price</h5>
+                         <p class="card-text">@item.description</p>
+                       </div><div class="card-footer clearfix" style="padding-bottom: 10px;"><button style="float: right;" type="submit" name="submit_param" value="submit_value" class="btn btn-primary">Add to cart</button></div>
+                     </form>
+                     }else{
+                       <form method="get" action="@routes.HomeController.login()" class="inline">
+                         <div class="card-body">
+                           <h4 class="card-title">
+
+                             <input type="hidden" name="extra_submit_param" value="extra_submit_value">
+
+                             @item.name
+
+                           </h4>
+                           <h5>$@item.price</h5>
+                           <p class="card-text">@item.description</p>
+                         </div><div class="card-footer clearfix" style="padding-bottom: 10px;"><button style="float: right;" type="submit" name="submit_param" value="submit_value" class="btn btn-primary">Add to cart</button></div>
+                       </form>
+                     }
                     </div>
                 </div>
             }
