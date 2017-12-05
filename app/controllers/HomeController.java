@@ -165,6 +165,9 @@ public class HomeController extends Controller {
     public Result product(Long item, Long ID) {
         InventoryItem inv = new InventoryItem();
         Form<InventoryItem> searchForm = formFactory.form(InventoryItem.class).fill(inv);
+        if(ID==0){
+            return ok(iitem.render(Item.find.byId(item),0,"zuz",searchForm));
+        }
         return ok(iitem.render(Item.find.byId(item), ID, Farmer.find.byId(ID).email, searchForm));
     }
 }
