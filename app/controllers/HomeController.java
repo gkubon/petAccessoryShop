@@ -61,6 +61,25 @@ public class HomeController extends Controller {
 
 
 
+
+    
+    public Result search(String cat,Long ID) {
+    	List<Item> items = Item.find.all();
+    	List<Item> out = new Vector<Item>();
+
+    	for(Item it : items){
+    		if(it.name.contains(cat)){
+    			out.add(it);
+    		}
+    	}
+    	String abc = "zuz";
+    	if(ID!=0){
+    		abc = Farmer.find.byId(ID).email;
+    	}
+
+    	return ok(iindex.render(out,ID,abc));
+    }
+    
     public Result cat(String cat,Long ID){
 	    List<Item> items = Item.find.all();
 	    List<Item> out = new Vector<Item>();
@@ -129,7 +148,6 @@ public class HomeController extends Controller {
         return ok(loginn.render(loginForm));
 
     }
-
 
 	public Result products() {
         List<Item> items = Item.find.all();
