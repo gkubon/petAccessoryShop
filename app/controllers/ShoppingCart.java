@@ -70,7 +70,10 @@ public class ShoppingCart extends Controller
             price=+it.price;
         }
 
-        return ok(cartv.render(out,id,Farmer.find.byId(id).email,price));
+        InventoryItem inv = new InventoryItem();
+        Form<InventoryItem> searchForm = formFactory.form(InventoryItem.class).fill(inv);
+
+        return ok(cartv.render(out,id,Farmer.find.byId(id).email,price,searchForm));
 
        // Long abc = (long)Cart.find.all().size();
        // Cart cart = Cart.find.byId(abc);
@@ -136,7 +139,8 @@ public class ShoppingCart extends Controller
         for(Item it: out){
             price=+it.price;
         }
-
-        return ok(cartv.render(out,id, Farmer.find.byId(id).email,price));
+        InventoryItem inv = new InventoryItem();
+        Form<InventoryItem> searchForm = formFactory.form(InventoryItem.class).fill(inv);
+        return ok(cartv.render(out,id, Farmer.find.byId(id).email,price,searchForm));
     }
 }

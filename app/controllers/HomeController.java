@@ -84,13 +84,17 @@ public class HomeController extends Controller {
     public Result login(){
         Farmer farmer = new Farmer();
         Form<Farmer> loginForm = formFactory.form(Farmer.class).fill(farmer);
-        return ok(loginn.render(loginForm));
+        InventoryItem inv = new InventoryItem();
+        Form<InventoryItem> searchForm = formFactory.form(InventoryItem.class).fill(inv);
+        return ok(loginn.render(loginForm,searchForm));
     }
 
     public Result register(){
         Farmer farmer = new Farmer();
         Form<Farmer> registerForm = formFactory.form(Farmer.class).fill(farmer);
-        return ok(register.render(registerForm));
+        InventoryItem inv = new InventoryItem();
+        Form<InventoryItem> searchForm = formFactory.form(InventoryItem.class).fill(inv);
+        return ok(register.render(registerForm,searchForm));
     }
 
     public Result loginPost(){
@@ -133,7 +137,9 @@ public class HomeController extends Controller {
             if(f.email.equals(userForm.get().email)){
                 Farmer farmer = new Farmer();
                 Form<Farmer> loginForm = formFactory.form(Farmer.class).fill(farmer);
-                return ok(loginn.render(loginForm));
+                InventoryItem inv = new InventoryItem();
+                Form<InventoryItem> searchForm = formFactory.form(InventoryItem.class).fill(inv);
+                return ok(loginn.render(loginForm,searchForm));
             }
             id = f.id;
         }
@@ -150,7 +156,9 @@ public class HomeController extends Controller {
 
         Farmer farmer = new Farmer();
         Form<Farmer> loginForm = formFactory.form(Farmer.class).fill(farmer);
-        return ok(loginn.render(loginForm));
+        InventoryItem inv = new InventoryItem();
+        Form<InventoryItem> searchForm = formFactory.form(InventoryItem.class).fill(inv);
+        return ok(loginn.render(loginForm,searchForm));
 
     }
 

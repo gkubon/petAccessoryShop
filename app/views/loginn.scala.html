@@ -1,4 +1,4 @@
-@(user: Form[Farmer])
+@(user: Form[Farmer],search: Form[InventoryItem])
 
 @import models.Farmer
 @import play.data.Form
@@ -36,6 +36,12 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <form action="/search/bar0" method="post">
+                <input type="text" name="name"></input>
+                <input type="submit" value="Search">
+              </form>
+            </li>
             <li class="nav-item">
               <a class="nav-link" href="@routes.HomeController.register()">Register</a>
             </li>

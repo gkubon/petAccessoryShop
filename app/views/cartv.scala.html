@@ -1,4 +1,4 @@
-@(items: List[Item],isLogged: Long,name: String,price: Double)
+@(items: List[Item],isLogged: Long,name: String,price: Double,search: Form[InventoryItem])
 
 <!DOCTYPE html>
 <html lang="en">
@@ -40,6 +40,12 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <form action="/search/bar@isLogged" method="post">
+              <input type="text" name="name"></input>
+              <input type="submit" value="Search">
+            </form>
+          </li>
         @if(isLogged>0){
           <li class="nav-item">
             <a class="nav-link" href="#">Hello @name</a>
