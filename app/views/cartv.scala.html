@@ -96,7 +96,6 @@
           <a href='@routes.HomeController.cat("Dog",isLogged)' class="list-group-item">Dogs</a>
           <a href='@routes.HomeController.cat("Cat",isLogged)' class="list-group-item">Cats</a>
           <a href='@routes.HomeController.cat("Small animals",isLogged)' class="list-group-item">Small animals</a>
-            <div id="paypal-button-container" class="list-group-item"></div>
           </div>
 
         </div>
@@ -166,13 +165,21 @@
                       </form>
                     }
 
+
               </div>
             </div>
           }
 
           </div>
             <!-- /.row -->
-
+          @if(price!=0.0){
+          <div id="paypal-button-container" style = "float: right;">
+            <h4>Total Price : $@price</h4>
+          </div>}else{
+            <div style="text-align: center">
+              <h3>Cart is empty!</h3>
+            </div>
+          }
         </div>
           <!-- /.col-lg-9 -->
 
@@ -208,7 +215,7 @@
 
       style: {
         label: 'checkout',
-        size:  'small',    // small | medium | large | responsive
+        size:  'medium',    // small | medium | large | responsive
         shape: 'pill',     // pill | rect
         color: 'gold'      // gold | blue | silver | black
       },
@@ -235,7 +242,7 @@
 
       onAuthorize: function(data, actions) {
         return actions.payment.execute().then(function() {
-          window.alert('Payment Complete!');
+          window.alert('Payment Complete! Confirmation of order and receipt was sent to Your mail');
         });
       }
 

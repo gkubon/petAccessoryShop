@@ -6,7 +6,7 @@
 
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 
   <head>
 
@@ -38,8 +38,8 @@
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
               <form action="/search/bar0" method="post">
-                <input type="text" name="name"></input>
-                <input type="submit" value="Search">
+                <input type="text" name="name">
+                <input type="submit" class="btn btn-primary" value="Search">
               </form>
             </li>
             <li class="nav-item">
@@ -107,13 +107,13 @@
               <span class="sr-only">Next</span>
             </a>
           </div>
-          @helper.form(action = routes.HomeController.loginPost()){
-            @helper.inputText(user("email"))
-            @helper.inputPassword(user("password"))
-            <button type="submit" name="submit_param" value="submit_value" class="link-button">
-              Login
-            </button>
-          }
+            <form action="/log/in" method="post">
+                  <label for="userMail">E-mail: </label>
+                  <input id="userMail" type="text" name="email">
+                  <label for="userPass">Password: </label>
+                  <input id="userPass" type="password" name="password">
+                  <button type="submit" name="submit_param" value="submit_value" class="btn btn-primary">Login</button>
+            </form>
 
 
             <!-- /.row -->

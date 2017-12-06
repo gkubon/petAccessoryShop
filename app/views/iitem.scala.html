@@ -109,14 +109,27 @@
 
           <div class="card mt-4">
             <img class="card-img-top img-fluid" src="@routes.Assets.at(item.picture)" alt="">
-            <form method="post" action="@routes.ShoppingCart.addToCart(isLogged,item.id)" class="inline">
-            <div class="card-body">
-              <h3 class="card-title">@item.name</h3>
-              <h4>$@item.price</h4>
-              <p class="card-text">@item.description</p>
-            </div>
-            <div class="card-footer clearfix" style="padding-bottom: 10px;"><button style="float: right;" type="submit" name="submit_param" value="submit_value" class="btn btn-primary">Add to cart</button></div>
-            </form>
+            @if(isLogged>0) {
+              <form method="post" action="@routes.ShoppingCart.addToCart(isLogged, item.id)" class="inline">
+                <div class="card-body">
+                  <h3 class="card-title">@item.name</h3>
+                  <h4>$@item.price</h4>
+                  <p class="card-text">@item.description</p>
+                </div>
+                <div class="card-footer clearfix" style="padding-bottom: 10px;"><button style="float: right;" type="submit" name="submit_param" value="submit_value" class="btn btn-primary">
+                  Add to cart</button></div>
+              </form>
+            }else{
+              <form method="get" action="@routes.HomeController.login()" class="inline">
+                <div class="card-body">
+                  <h3 class="card-title">@item.name</h3>
+                  <h4>$@item.price</h4>
+                  <p class="card-text">@item.description</p>
+                </div>
+                <div class="card-footer clearfix" style="padding-bottom: 10px;"><button style="float: right;" type="submit" name="submit_param" value="submit_value" class="btn btn-primary">
+                  Add to cart</button></div>
+              </form>
+            }
           </div>
             <!-- /.card -->
 

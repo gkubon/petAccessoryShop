@@ -107,13 +107,13 @@
               <span class="sr-only">Next</span>
             </a>
           </div>
-          @helper.form(action = routes.HomeController.registerPost()){
-            @helper.inputText(user("email"))
-            @helper.inputPassword(user("password"))
-            <button type="submit" name="submit_param" value="submit_value" class="link-button">
-              Register
-            </button>
-          }
+          <form action="/reg/in" method="post">
+            <label for="userMail">E-mail: </label>
+            <input id="userMail" type="text" name="email">
+            <label for="userPass">Password: </label>
+            <input id="userPass" type="password" name="password">
+            <button type="submit" name="submit_param" value="submit_value" class="btn btn-primary">Register</button>
+          </form>
 
 
             <!-- /.row -->

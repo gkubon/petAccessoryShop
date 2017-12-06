@@ -67,7 +67,7 @@ public class ShoppingCart extends Controller
         }
         Double price = Double.valueOf(0);
         for(Item it: out){
-            price=+it.price;
+            price=price+it.price;
         }
 
         InventoryItem inv = new InventoryItem();
@@ -137,7 +137,35 @@ public class ShoppingCart extends Controller
         }
         Double price = Double.valueOf(0);
         for(Item it: out){
-            price=+it.price;
+            price=price+it.price;
+        }
+        InventoryItem inv = new InventoryItem();
+        Form<InventoryItem> searchForm = formFactory.form(InventoryItem.class).fill(inv);
+        return ok(cartv.render(out,id, Farmer.find.byId(id).email,price,searchForm));
+    }
+
+    public Result deleteAllFromCart(Long id){
+        String s = "UPDATE cart SET items= :items WHERE id = :id";
+        SqlUpdate update = Ebean.createSqlUpdate(s);
+        update.setParameter("items","0");
+        update.setParameter("id",id);
+        int count = Ebean.execute(update);
+        List<Item> items = Item.find.all();
+        List<Item> out = new Vector<Item>();
+        Cart cart = Cart.find.byId(id);
+
+        String[] ids = cart.items.split(",");
+
+        for(Item itm : items){
+            for(String st : ids){
+                if(itm.id==Long.parseLong(st)){
+                    out.add(itm);
+                }
+            }
+        }
+        Double price = Double.valueOf(0);
+        for(Item it: out){
+            price=price+it.price;
         }
         InventoryItem inv = new InventoryItem();
         Form<InventoryItem> searchForm = formFactory.form(InventoryItem.class).fill(inv);

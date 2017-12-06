@@ -11,6 +11,7 @@ GET     /product/:item/:id               controllers.HomeController.product(item
 GET     /cart:id                      controllers.ShoppingCart.index(id: Long)
 POST     /:id                        controllers.ShoppingCart.addToCart(id : Long, item: Long)
 POST     /del/:id                   controllers.ShoppingCart.deleteFromCart(id : Long,item: Long)
+POST    /pay/up:id                     controllers.ShoppingCart.deleteAllFromCart(id : Long)
 GET      /log/in                         controllers.HomeController.login
 POST     /log/in                         controllers.HomeController.loginPost
 GET     /reg/in                             controllers.HomeController.register
